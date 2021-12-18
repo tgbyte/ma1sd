@@ -112,7 +112,7 @@ dependencies {
     api 'org.apache.directory.api:api-all:1.0.3'
 
     // DNS lookups
-    api 'dnsjava:dnsjava:2.1.9'
+    api 'dnsjava:dnsjava:3.4.3'
 
     // HTTP connections
     api 'org.apache.httpcomponents:httpclient:4.5.13'
