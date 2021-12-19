@@ -99,13 +99,13 @@ repositories {
 
 dependencies {
     // Logging
-    api 'org.slf4j:slf4j-simple:1.7.25'
+    api 'org.slf4j:slf4j-simple:1.7.32'
 
     // Easy file management
-    api 'commons-io:commons-io:2.8.0'
+    api 'commons-io:commons-io:2.11.0'
 
     // Config management
-    api 'org.yaml:snakeyaml:1.28'
+    api 'org.yaml:snakeyaml:1.29'
 
     // Dependencies from old Matrix-java-sdk
     api 'org.apache.commons:commons-lang3:3.12.0'
@@ -113,7 +113,7 @@ dependencies {
     api 'commons-codec:commons-codec:1.15'
 
     // ORMLite
-    api 'com.j256.ormlite:ormlite-jdbc:5.3'
+    api 'com.j256.ormlite:ormlite-jdbc:5.7'
 
     // ed25519 handling
     api 'net.i2p.crypto:eddsa:0.3.0'
@@ -141,16 +141,16 @@ dependencies {
     api 'com.mchange:c3p0:0.9.5.5'
 
     // SQLite
-    api 'org.xerial:sqlite-jdbc:3.34.0'
+    api 'org.xerial:sqlite-jdbc:3.36.0.2'
 
     // PostgreSQL
-    api 'org.postgresql:postgresql:42.2.19'
+    api 'org.postgresql:postgresql:42.3.1'
 
     // MariaDB/MySQL
-    api 'org.mariadb.jdbc:mariadb-java-client:2.7.2'
+    api 'org.mariadb.jdbc:mariadb-java-client:2.7.3'
 
     // UNIX sockets
-    api 'com.kohlschutter.junixsocket:junixsocket-core:2.3.3'
+    api 'com.kohlschutter.junixsocket:junixsocket-core:2.4.0'
 
     // Twilio SDK for SMS
     api 'com.twilio.sdk:twilio:7.45.0'
@@ -162,15 +162,15 @@ dependencies {
     api 'org.zeroturnaround:zt-exec:1.12'
 
     // HTTP server
-    api 'io.undertow:undertow-core:2.2.7.Final'
+    api 'io.undertow:undertow-core:2.2.14.Final'
 
     // Command parser for AS interface
-    api 'commons-cli:commons-cli:1.4'
+    api 'commons-cli:commons-cli:1.5.0'
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'com.github.tomakehurst:wiremock:2.27.2'
     testImplementation 'com.unboundid:unboundid-ldapsdk:6.0.3'
-    testImplementation 'com.icegreen:greenmail:1.5.11'
+    testImplementation 'com.icegreen:greenmail:1.6.5'
 }
 
 jar {
