@@ -52,6 +52,9 @@ mainClassName = 'io.kamax.mxisd.MxisdStandaloneExec'
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
 String ma1sdVersion() {
     def versionPattern = Pattern.compile("v(\\d+\\.)?(\\d+\\.)?(\\d+)(-.*)?")
 
