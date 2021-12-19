@@ -20,9 +20,8 @@
 
 package io.kamax.mxisd.backend.firebase;
 
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
-import com.google.firebase.tasks.OnFailureListener;
-import com.google.firebase.tasks.OnSuccessListener;
 import io.kamax.matrix.MatrixID;
 import io.kamax.matrix.ThreePidMedium;
 import io.kamax.mxisd.config.MxisdConfig;
@@ -76,39 +75,27 @@ public class GoogleFirebaseProvider extends GoogleFirebaseBackend implements ITh
     }
 
     private Optional<UserRecord> findInternal(String medium, String address) {
-        final UserRecord[] r = new UserRecord[1];
-        CountDownLatch l = new CountDownLatch(1);
+        UserRecord r;
 
-        OnSuccessListener<UserRecord> success = result -> {
-            log.info("Found 3PID match for {}:{} - UID is {}", medium, address, result.getUid());
-            r[0] = result;
-            l.countDown();
-        };
-
-        OnFailureListener failure = e -> {
+        try {
+            if (ThreePidMedium.Email.is(medium)) {
+                log.info("Performing E-mail 3PID lookup for {}", address);
+                r = getFirebase().getUserByEmail(address);
+                log.info("Found 3PID match for {}:{} - UID is {}", medium, address, r.getUid());
+            } else if (ThreePidMedium.PhoneNumber.is(medium)) {
+                log.info("Performing msisdn 3PID lookup for {}", address);
+                r = getFirebase().getUserByPhoneNumber(address);
+                log.info("Found 3PID match for {}:{} - UID is {}", medium, address, r.getUid());
+            } else {
+                log.info("{} is not a supported 3PID medium", medium);
+                r = null;
+            }
+        } catch (FirebaseAuthException e) {
             log.info("No 3PID match for {}:{} - {}", medium, address, e.getMessage());
-            r[0] = null;
-            l.countDown();
-        };
-
-        if (ThreePidMedium.Email.is(medium)) {
-            log.info("Performing E-mail 3PID lookup for {}", address);
-            getFirebase().getUserByEmail(address)
-                    .addOnSuccessListener(success)
-                    .addOnFailureListener(failure);
-            waitOnLatch(l);
-        } else if (ThreePidMedium.PhoneNumber.is(medium)) {
-            log.info("Performing msisdn 3PID lookup for {}", address);
-            getFirebase().getUserByPhoneNumber(address)
-                    .addOnSuccessListener(success)
-                    .addOnFailureListener(failure);
-            waitOnLatch(l);
-        } else {
-            log.info("{} is not a supported 3PID medium", medium);
-            r[0] = null;
+            r = null;
         }
 
-        return Optional.ofNullable(r[0]);
+        return Optional.ofNullable(r);
     }
 
     @Override
