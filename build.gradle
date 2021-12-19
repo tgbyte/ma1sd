@@ -20,11 +20,21 @@
 
 import java.util.regex.Pattern
 
-apply plugin: 'java-library'
-apply plugin: 'application'
-apply plugin: 'com.github.johnrengelman.shadow'
-apply plugin: 'idea'
-apply plugin: 'com.github.ben-manes.versions'
+buildscript {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'java-library'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+    id 'idea'
+    id 'com.github.ben-manes.versions' version '0.38.0'
+    id 'com.google.cloud.tools.jib' version '3.1.4'
+}
 
 def confFileName = "ma1sd.example.yaml"
 def distDir = "${project.buildDir}/dist"
@@ -49,11 +59,19 @@ def dockerImageTag = "${dockerImageName}:${ma1sdVersion()}"
 
 group = 'io.kamax'
 mainClassName = 'io.kamax.mxisd.MxisdStandaloneExec'
+
+// javac
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
-
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
+
+// jib
+jib.from.image = 'eclipse-temurin:11'
+jib.container.environment = [CONF_FILE_PATH: "/etc/ma1sd/ma1sd.yaml", SIGN_KEY_PATH: "/var/ma1sd/sign.key", SQLITE_DATABASE_PATH: "/var/ma1sd/ma1sd.db"]
+jib.container.mainClass = mainClassName
+jib.container.ports = ['8090']
+jib.container.volumes = ['/etc/ma1sd', '/var/ma1sd']
 
 String ma1sdVersion() {
     def versionPattern = Pattern.compile("v(\\d+\\.)?(\\d+\\.)?(\\d+)(-.*)?")
@@ -72,18 +90,6 @@ String gitVersion() {
         standardOutput = out
     }
     return out.toString().replace(System.lineSeparator(), '')
-}
-
-buildscript {
-    repositories {
-        gradlePluginPortal()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.38.0'
-    }
 }
 
 repositories {

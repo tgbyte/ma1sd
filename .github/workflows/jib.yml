@@ -1,0 +1,36 @@
+name: Build and Publish Docker image
+
+on:
+  workflow_run:
+    workflows:
+      - build
+    branches:
+      - master
+    types:
+      - completed
+
+jobs:
+  jib:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      - name: Jib build
+        run: >
+          ./gradlew jib \
+            -Djib.to.image=${GITHUB_REPOSITORY} \
+            -Djib.to.auth.username=${{ secrets.DOCKER_REGISTRY_USERNAME }} \
+            -Djib.to.auth.password=${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+        env:
+          DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+          DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
