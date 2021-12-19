@@ -68,6 +68,7 @@ compileTestJava.options.encoding = "UTF-8"
 
 // jib
 jib.from.image = 'eclipse-temurin:11'
+jib.container.args = ['-c', '/etc/ma1sd/ma1sd.yaml']
 jib.container.environment = [CONF_FILE_PATH: "/etc/ma1sd/ma1sd.yaml", SIGN_KEY_PATH: "/var/ma1sd/sign.key", SQLITE_DATABASE_PATH: "/var/ma1sd/ma1sd.db"]
 jib.container.mainClass = mainClassName
 jib.container.ports = ['8090']
