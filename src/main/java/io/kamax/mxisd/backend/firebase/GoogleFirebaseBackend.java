@@ -20,11 +20,10 @@
 
 package io.kamax.mxisd.backend.firebase;
 
+import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseCredential;
-import com.google.firebase.auth.FirebaseCredentials;
 import com.google.firebase.database.FirebaseDatabase;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -58,13 +57,13 @@ public class GoogleFirebaseBackend {
         }
     }
 
-    private FirebaseCredential getCreds(String credsPath) throws IOException {
+    private GoogleCredentials getCreds(String credsPath) throws IOException {
         if (StringUtils.isNotBlank(credsPath)) {
             try (FileInputStream is = new FileInputStream(credsPath)) {
-                return FirebaseCredentials.fromCertificate(is);
+                return GoogleCredentials.fromStream(is);
             }
         } else {
-            return FirebaseCredentials.applicationDefault();
+            return GoogleCredentials.getApplicationDefault();
         }
     }
 
@@ -73,8 +72,8 @@ public class GoogleFirebaseBackend {
             throw new IllegalArgumentException("Firebase database is not configured");
         }
 
-        return new FirebaseOptions.Builder()
-                .setCredential(getCreds(credsPath))
+        return FirebaseOptions.builder()
+                .setCredentials(getCreds(credsPath))
                 .setDatabaseUrl(db)
                 .build();
     }

@@ -128,7 +128,7 @@ dependencies {
     api 'com.sun.mail:javax.mail:1.6.2'
 
     // Google Firebase Authentication backend
-    api 'com.google.firebase:firebase-admin:5.3.0'
+    api 'com.google.firebase:firebase-admin:8.1.0'
 
     // Connection Pool
     api 'com.mchange:c3p0:0.9.5.5'

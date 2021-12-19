@@ -20,7 +20,10 @@
 
 package io.kamax.mxisd.backend.firebase;
 
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseToken;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.auth.UserRecord;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import io.kamax.matrix.ThreePid;
@@ -106,62 +109,42 @@ public class GoogleFirebaseAuthenticator extends GoogleFirebaseBackend implement
         final BackendAuthResult result = BackendAuthResult.failure();
 
         String localpart = mxid.getLocalPart();
-        CountDownLatch l = new CountDownLatch(1);
-        getFirebase().verifyIdToken(password).addOnSuccessListener(token -> {
-            try {
-                if (!StringUtils.equals(localpart, token.getUid())) {
-                    log.info("Failure to authenticate {}: Matrix ID localpart '{}' does not match Firebase UID '{}'", mxid, localpart, token.getUid());
-                    result.fail();
-                    return;
-                }
 
-                result.succeed(mxid.getId(), UserIdType.MatrixID.getId(), token.getName());
-                log.info("{} was successfully authenticated", mxid);
-                log.info("Fetching profile for {}", mxid);
-                CountDownLatch userRecordLatch = new CountDownLatch(1);
-                getFirebase().getUser(token.getUid()).addOnSuccessListener(user -> {
-                    try {
-                        toEmail(result, user.getEmail());
-                        toMsisdn(result, user.getPhoneNumber());
+        try {
+            FirebaseToken token = getFirebase().verifyIdToken(password);
 
-                        for (UserInfo info : user.getProviderData()) {
-                            toEmail(result, info.getEmail());
-                            toMsisdn(result, info.getPhoneNumber());
-                        }
-
-                        log.info("Got {} 3PIDs in profile", result.getProfile().getThreePids().size());
-                    } finally {
-                        userRecordLatch.countDown();
-                    }
-                }).addOnFailureListener(e -> {
-                    try {
-                        log.warn("Unable to fetch Firebase user profile for {}", mxid);
-                        result.fail();
-                    } finally {
-                        userRecordLatch.countDown();
-                    }
-                });
-
-                waitOnLatch(result, userRecordLatch, "Firebase user profile");
-            } finally {
-                l.countDown();
-            }
-        }).addOnFailureListener(e -> {
-            try {
-                if (e instanceof IllegalArgumentException) {
-                    log.info("Failure to authenticate {}: invalid firebase token", mxid);
-                } else {
-                    log.info("Failure to authenticate {}: {}", mxid, e.getMessage(), e);
-                    log.info("Exception", e);
-                }
-
+            if (!StringUtils.equals(localpart, token.getUid())) {
+                log.info("Failure to authenticate {}: Matrix ID localpart '{}' does not match Firebase UID '{}'", mxid, localpart, token.getUid());
                 result.fail();
-            } finally {
-                l.countDown();
+                return result;
             }
-        });
 
-        waitOnLatch(result, l, "Firebase auth check");
+            result.succeed(mxid.getId(), UserIdType.MatrixID.getId(), token.getName());
+            log.info("{} was successfully authenticated", mxid);
+            log.info("Fetching profile for {}", mxid);
+
+            try {
+                UserRecord user = getFirebase().getUser(token.getUid());
+                toEmail(result, user.getEmail());
+                toMsisdn(result, user.getPhoneNumber());
+
+                for (UserInfo info : user.getProviderData()) {
+                    toEmail(result, info.getEmail());
+                    toMsisdn(result, info.getPhoneNumber());
+                }
+
+                log.info("Got {} 3PIDs in profile", result.getProfile().getThreePids().size());
+            } catch (FirebaseAuthException e) {
+                log.warn("Unable to fetch Firebase user profile for {}", mxid);
+                result.fail();
+            }
+        } catch (FirebaseAuthException | IllegalArgumentException e) {
+            log.info("Failure to authenticate {}: {}", mxid, e.getMessage(), e);
+            log.info("Exception", e);
+
+            result.fail();
+        }
+
         return result;
     }
 
