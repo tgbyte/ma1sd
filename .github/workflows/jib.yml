@@ -3,7 +3,7 @@ name: Build and Publish Docker image
 on:
   workflow_run:
     workflows:
-      - build
+      - Java CI
     branches:
       - master
     types:
