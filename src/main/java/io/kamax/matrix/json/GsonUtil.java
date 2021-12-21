@@ -115,7 +115,7 @@ public class GsonUtil {
 
     public static JsonElement parse(String s) {
         try {
-            return new JsonParser().parse(s);
+            return JsonParser.parseString(s);
         } catch (JsonParseException e) {
             throw new InvalidJsonException(e);
         }

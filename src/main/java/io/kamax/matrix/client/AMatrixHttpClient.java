@@ -23,12 +23,16 @@ package io.kamax.matrix.client;
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
-
 import io.kamax.matrix.MatrixErrorInfo;
 import io.kamax.matrix._MatrixID;
 import io.kamax.matrix.hs._MatrixHomeserver;
 import io.kamax.matrix.json.GsonUtil;
-
+import okhttp3.HttpUrl;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -37,12 +41,9 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.Objects;
 import java.util.Optional;
-
-
-import okhttp3.*;
+import java.util.concurrent.TimeUnit;
 
 public abstract class AMatrixHttpClient implements _MatrixClientRaw {
 
@@ -51,7 +52,6 @@ public abstract class AMatrixHttpClient implements _MatrixClientRaw {
     protected MatrixClientContext context;
 
     protected Gson gson = GsonUtil.get();
-    protected JsonParser jsonParser = new JsonParser();
     private OkHttpClient client;
 
     public AMatrixHttpClient(String domain) {
@@ -315,7 +315,7 @@ public abstract class AMatrixHttpClient implements _MatrixClientRaw {
             return Optional.empty();
         }
 
-        return GsonUtil.findString(jsonParser.parse(body).getAsJsonObject(), jsonObjectName);
+        return GsonUtil.findString(JsonParser.parseString(body).getAsJsonObject(), jsonObjectName);
     }
 
     private MatrixErrorInfo createErrorInfo(String body, int responseStatus) {

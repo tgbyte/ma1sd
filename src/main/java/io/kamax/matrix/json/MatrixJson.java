@@ -54,8 +54,6 @@ public class MatrixJson {
         }
     }
 
-    private static JsonParser parser = new JsonParser();
-
     private static void encodeCanonical(JsonObject el, JsonWriterUnchecked writer) throws IOException {
         writer.beginObject();
         el.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey)).forEachOrdered(entry -> {
@@ -100,7 +98,7 @@ public class MatrixJson {
     }
 
     public static String encodeCanonical(String data) {
-        JsonElement el = parser.parse(data);
+        JsonElement el = JsonParser.parseString(data);
         if (!el.isJsonObject()) {
             /*
              * TODO seems implied because of how signing/checking signatures is done and because of

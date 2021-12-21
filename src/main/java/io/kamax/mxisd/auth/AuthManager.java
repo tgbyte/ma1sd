@@ -250,7 +250,7 @@ public class AuthManager {
                 String error = EntityUtils.toString(httpResponse.getEntity());
                 if (httpResponse.getEntity() != null) {
                     try {
-                        JsonObject bodyJson = new JsonParser().parse(error).getAsJsonObject();
+                        JsonObject bodyJson = JsonParser.parseString(error).getAsJsonObject();
                         if (bodyJson.has("errcode")) {
                             errcode = bodyJson.get("errcode").getAsString();
                         }

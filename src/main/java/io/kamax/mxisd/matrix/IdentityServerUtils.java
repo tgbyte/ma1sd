@@ -53,7 +53,6 @@ import java.util.Optional;
 public class IdentityServerUtils {
 
     private static Logger log = LoggerFactory.getLogger(IdentityServerUtils.class);
-    private static JsonParser parser = new JsonParser();
 
     private static CloseableHttpClient client;
 
@@ -81,7 +80,7 @@ public class IdentityServerUtils {
                 return false;
             }
 
-            JsonElement el = parser.parse(IOUtils.toString(res.getEntity().getContent(), StandardCharsets.UTF_8));
+            JsonElement el = JsonParser.parseString(IOUtils.toString(res.getEntity().getContent(), StandardCharsets.UTF_8));
             if (!el.isJsonObject()) {
                 log.debug("IS {} did not send back an empty JSON object as per spec, not a valid IS", remote);
                 return false;

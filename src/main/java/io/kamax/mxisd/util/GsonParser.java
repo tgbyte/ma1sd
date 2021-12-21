@@ -33,7 +33,6 @@ import java.util.Optional;
 
 public class GsonParser {
 
-    private JsonParser parser = new JsonParser();
     private Gson gson;
 
     public GsonParser() {
@@ -45,7 +44,7 @@ public class GsonParser {
     }
 
     public JsonObject parse(InputStream stream) throws IOException {
-        JsonElement el = parser.parse(IOUtils.toString(stream, StandardCharsets.UTF_8));
+        JsonElement el = JsonParser.parseString(IOUtils.toString(stream, StandardCharsets.UTF_8));
         if (!el.isJsonObject()) {
             throw new InvalidResponseJsonException("Response body is not a JSON object");
         }

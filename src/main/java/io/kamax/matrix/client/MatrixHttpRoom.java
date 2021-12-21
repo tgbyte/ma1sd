@@ -22,7 +22,7 @@ package io.kamax.matrix.client;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
+import com.google.gson.JsonParser;
 import io.kamax.matrix.MatrixErrorInfo;
 import io.kamax.matrix.MatrixID;
 import io.kamax.matrix._MatrixContent;
@@ -35,8 +35,13 @@ import io.kamax.matrix.json.RoomMessageFormattedTextPutBody;
 import io.kamax.matrix.json.RoomMessageTextPutBody;
 import io.kamax.matrix.json.RoomTagSetBody;
 import io.kamax.matrix.json.event.MatrixJsonPersistentEvent;
-import io.kamax.matrix.room.*;
-
+import io.kamax.matrix.room.MatrixRoomMessageChunk;
+import io.kamax.matrix.room.ReceiptType;
+import io.kamax.matrix.room.Tag;
+import io.kamax.matrix.room._MatrixRoomMessageChunk;
+import io.kamax.matrix.room._MatrixRoomMessageChunkOptions;
+import okhttp3.HttpUrl;
+import okhttp3.Request;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,10 +54,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-
-import okhttp3.HttpUrl;
-import okhttp3.Request;
 
 public class MatrixHttpRoom extends AMatrixHttpClient implements _MatrixRoom {
 
@@ -278,7 +279,7 @@ public class MatrixHttpRoom extends AMatrixHttpClient implements _MatrixRoom {
 
         List<_MatrixUserProfile> ids = new ArrayList<>();
         if (StringUtils.isNotEmpty(body)) {
-            JsonObject joinedUsers = jsonParser.parse(body).getAsJsonObject().get("joined").getAsJsonObject();
+            JsonObject joinedUsers = JsonParser.parseString(body).getAsJsonObject().get("joined").getAsJsonObject();
             ids = joinedUsers.entrySet().stream().filter(e -> e.getValue().isJsonObject()).map(entry -> {
                 JsonObject obj = entry.getValue().getAsJsonObject();
                 return new MatrixHttpUser(getContext(), MatrixID.asAcceptable(entry.getKey())) {
