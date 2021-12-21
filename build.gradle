@@ -105,7 +105,7 @@ dependencies {
     api 'commons-io:commons-io:2.11.0'
 
     // Config management
-    api 'org.yaml:snakeyaml:1.29'
+    api 'org.yaml:snakeyaml:1.30'
 
     // Dependencies from old Matrix-java-sdk
     api 'org.apache.commons:commons-lang3:3.12.0'
