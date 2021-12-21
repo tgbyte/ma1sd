@@ -20,8 +20,13 @@
 
 package io.kamax.mxisd.threepid.notification.email;
 
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
 import com.sendgrid.SendGrid;
-import com.sendgrid.SendGridException;
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
 import io.kamax.matrix.ThreePid;
 import io.kamax.matrix.ThreePidMedium;
 import io.kamax.mxisd.config.MxisdConfig;
@@ -39,8 +44,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-import static com.sendgrid.SendGrid.Email;
-import static com.sendgrid.SendGrid.Response;
 import static io.kamax.mxisd.config.threepid.connector.EmailSendGridConfig.EmailTemplate;
 
 public class EmailSendGridNotificationHandler extends PlaceholderNotificationGenerator implements NotificationHandler {
@@ -68,10 +71,10 @@ public class EmailSendGridNotificationHandler extends PlaceholderNotificationGen
         return ThreePidMedium.Email.getId();
     }
 
-    protected Email getEmail() {
+    protected Email getFrom() {
         Email email = new Email();
-        email.setFrom(cfg.getIdentity().getFrom());
-        email.setFromName(cfg.getIdentity().getName());
+        email.setEmail(cfg.getIdentity().getFrom());
+        email.setName(cfg.getIdentity().getName());
         return email;
     }
 
@@ -90,12 +93,16 @@ public class EmailSendGridNotificationHandler extends PlaceholderNotificationGen
             throw new FeatureNotAvailable("No template has been configured for Matrix ID invite notifications");
         }
 
-        Email email = getEmail();
-        email.setSubject(populateForInvite(invite, template.getSubject()));
-        email.setText(populateForInvite(invite, getFromFile(template.getBody().getText())));
-        email.setHtml(populateForInvite(invite, getFromFile(template.getBody().getHtml())));
+        Mail mail = new Mail();
+        mail.setSubject(populateForInvite(invite, template.getSubject()));
 
-        send(invite.getAddress(), email);
+        Content plainContent = new Content("text/plain", populateForInvite(invite, getFromFile(template.getBody().getText())));
+        Content htmlContent = new Content("text/html", populateForInvite(invite, getFromFile(template.getBody().getHtml())));
+
+        mail.addContent(plainContent);
+        mail.addContent(htmlContent);
+
+        send(invite.getAddress(), mail);
     }
 
     @Override
@@ -105,12 +112,16 @@ public class EmailSendGridNotificationHandler extends PlaceholderNotificationGen
             throw new FeatureNotAvailable("No template has been configured for 3PID invite notifications");
         }
 
-        Email email = getEmail();
-        email.setSubject(populateForReply(invite, template.getSubject()));
-        email.setText(populateForReply(invite, getFromFile(template.getBody().getText())));
-        email.setHtml(populateForReply(invite, getFromFile(template.getBody().getHtml())));
+        Mail mail = new Mail();
+        mail.setSubject(populateForReply(invite, template.getSubject()));
 
-        send(invite.getInvite().getAddress(), email);
+        Content plainContent = new Content("text/plain", populateForReply(invite, getFromFile(template.getBody().getText())));
+        Content htmlContent = new Content("text/html", populateForReply(invite, getFromFile(template.getBody().getHtml())));
+
+        mail.addContent(plainContent);
+        mail.addContent(htmlContent);
+
+        send(invite.getInvite().getAddress(), mail);
     }
 
     @Override
@@ -120,12 +131,16 @@ public class EmailSendGridNotificationHandler extends PlaceholderNotificationGen
             throw new FeatureNotAvailable("No template has been configured for validation notifications");
         }
 
-        Email email = getEmail();
-        email.setSubject(populateForValidation(session, template.getSubject()));
-        email.setText(populateForValidation(session, getFromFile(template.getBody().getText())));
-        email.setHtml(populateForValidation(session, getFromFile(template.getBody().getHtml())));
+        Mail mail = new Mail();
+        mail.setSubject(populateForValidation(session, template.getSubject()));
 
-        send(session.getThreePid().getAddress(), email);
+        Content plainContent = new Content("text/plain", populateForValidation(session, getFromFile(template.getBody().getText())));
+        Content htmlContent = new Content("text/html", populateForValidation(session, getFromFile(template.getBody().getHtml())));
+
+        mail.addContent(plainContent);
+        mail.addContent(htmlContent);
+
+        send(session.getThreePid().getAddress(), mail);
     }
 
     @Override
@@ -135,31 +150,40 @@ public class EmailSendGridNotificationHandler extends PlaceholderNotificationGen
             throw new FeatureNotAvailable("No template has been configured for unbind notifications");
         }
 
-        Email email = getEmail();
-        email.setSubject(populateForCommon(tpid, template.getSubject()));
-        email.setText(populateForCommon(tpid, getFromFile(template.getBody().getText())));
-        email.setHtml(populateForCommon(tpid, getFromFile(template.getBody().getHtml())));
+        Mail mail = new Mail();
+        mail.setSubject(populateForCommon(tpid, template.getSubject()));
 
-        send(tpid.getAddress(), email);
+        Content plainContent = new Content("text/plain", populateForCommon(tpid, getFromFile(template.getBody().getText())));
+        Content htmlContent = new Content("text/html", populateForCommon(tpid, getFromFile(template.getBody().getHtml())));
+
+        mail.addContent(plainContent);
+        mail.addContent(htmlContent);
+
+        send(tpid.getAddress(), mail);
     }
 
-    private void send(String recipient, Email email) {
+    private void send(String recipient, Mail mail) {
         if (StringUtils.isBlank(cfg.getIdentity().getFrom())) {
             throw new FeatureNotAvailable("3PID Email identity: sender address is empty - " +
                     "You must set a value for notifications to work");
         }
 
         try {
-            email.addTo(recipient);
-            email.setFrom(cfg.getIdentity().getFrom());
-            email.setFromName(cfg.getIdentity().getName());
-            Response response = sendgrid.send(email);
-            if (response.getStatus()) {
+            mail.setFrom(getFrom());
+
+            Request request = new Request();
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
+
+            Response response = sendgrid.api(request);
+
+            if (response.getStatusCode() < 300) {
                 log.info("Successfully sent email to {} using SendGrid", recipient);
             } else {
-                throw new RuntimeException("Error sending via SendGrid to " + recipient + ": " + response.getMessage());
+                throw new RuntimeException("Error sending via SendGrid to " + recipient + ": " + response.getStatusCode() + ", " + response.getBody());
             }
-        } catch (SendGridException e) {
+        } catch (IOException e) {
             throw new RuntimeException("Unable to send e-mail invite via SendGrid to " + recipient, e);
         }
     }
