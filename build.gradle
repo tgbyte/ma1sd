@@ -113,7 +113,7 @@ dependencies {
     api 'commons-codec:commons-codec:1.15'
 
     // ORMLite
-    api 'com.j256.ormlite:ormlite-jdbc:5.7'
+    api 'com.j256.ormlite:ormlite-jdbc:6.1'
 
     // ed25519 handling
     api 'net.i2p.crypto:eddsa:0.3.0'
