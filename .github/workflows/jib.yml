@@ -5,6 +5,7 @@ on:
     workflows:
       - Java CI
     branches:
+      - main
       - master
     types:
       - completed
