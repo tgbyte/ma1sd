@@ -25,7 +25,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import io.kamax.mxisd.http.IsAPIv1;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;

@@ -29,7 +29,7 @@ import io.kamax.mxisd.config.sql.synapse.SynapseSqlProviderConfig;
 import io.kamax.mxisd.config.threepid.ThreePidConfig;
 import io.kamax.mxisd.config.threepid.notification.NotificationConfig;
 import io.kamax.mxisd.config.wordpress.WordpressConfig;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

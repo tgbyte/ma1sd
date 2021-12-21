@@ -23,7 +23,7 @@ package io.kamax.mxisd.config.sql.synapse;
 import io.kamax.mxisd.UserIdType;
 import io.kamax.mxisd.backend.sql.synapse.SynapseQueries;
 import io.kamax.mxisd.config.sql.SqlConfig;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

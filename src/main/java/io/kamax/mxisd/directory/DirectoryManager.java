@@ -31,7 +31,7 @@ import io.kamax.mxisd.http.io.UserDirectorySearchRequest;
 import io.kamax.mxisd.http.io.UserDirectorySearchResult;
 import io.kamax.mxisd.util.RestClientUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;

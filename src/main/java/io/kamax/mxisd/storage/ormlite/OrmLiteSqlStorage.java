@@ -50,7 +50,7 @@ import io.kamax.mxisd.storage.ormlite.dao.HistoricalThreePidInviteIO;
 import io.kamax.mxisd.storage.ormlite.dao.AcceptedDao;
 import io.kamax.mxisd.storage.ormlite.dao.ThreePidInviteIO;
 import io.kamax.mxisd.storage.ormlite.dao.ThreePidSessionDao;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

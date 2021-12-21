@@ -28,7 +28,7 @@ import io.kamax.mxisd.config.sql.generic.GenericSqlProviderConfig;
 import io.kamax.mxisd.directory.DirectoryProvider;
 import io.kamax.mxisd.exception.InternalServerError;
 import io.kamax.mxisd.http.io.UserDirectorySearchResult;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -24,7 +24,7 @@ import io.kamax.matrix.ThreePid;
 import io.kamax.mxisd.exception.BadRequestException;
 import io.kamax.mxisd.exception.InvalidCredentialsException;
 import io.kamax.mxisd.storage.dao.IThreePidSessionDao;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;

@@ -32,7 +32,7 @@ import io.kamax.mxisd.config.MatrixConfig;
 import io.kamax.mxisd.config.ldap.LdapConfig;
 import io.kamax.mxisd.exception.InternalServerError;
 import io.kamax.mxisd.util.GsonUtil;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.directory.api.ldap.model.cursor.CursorException;
 import org.apache.directory.api.ldap.model.cursor.CursorLdapReferralException;
 import org.apache.directory.api.ldap.model.cursor.EntryCursor;

@@ -21,7 +21,7 @@
 package io.kamax.mxisd.config.wordpress;
 
 import io.kamax.mxisd.exception.ConfigurationException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;

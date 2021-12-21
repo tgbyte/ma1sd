@@ -26,7 +26,7 @@ import io.kamax.mxisd.lookup.SingleLookupRequest;
 import io.kamax.mxisd.lookup.ThreePidMapping;
 import io.kamax.mxisd.lookup.fetcher.IBridgeFetcher;
 import io.kamax.mxisd.lookup.fetcher.IRemoteIdentityServerFetcher;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

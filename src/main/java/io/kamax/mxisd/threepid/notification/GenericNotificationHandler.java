@@ -28,7 +28,7 @@ import io.kamax.mxisd.notification.NotificationHandler;
 import io.kamax.mxisd.threepid.connector.ThreePidConnector;
 import io.kamax.mxisd.threepid.generator.NotificationGenerator;
 import io.kamax.mxisd.threepid.session.IThreePidSession;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 

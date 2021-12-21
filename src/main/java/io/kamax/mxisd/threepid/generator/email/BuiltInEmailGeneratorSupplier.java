@@ -24,7 +24,7 @@ import io.kamax.matrix.json.GsonUtil;
 import io.kamax.mxisd.Mxisd;
 import io.kamax.mxisd.config.threepid.medium.EmailConfig;
 import io.kamax.mxisd.config.threepid.medium.EmailTemplateConfig;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Optional;
 

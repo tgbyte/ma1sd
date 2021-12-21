@@ -28,8 +28,8 @@ import io.kamax.mxisd.invitation.IMatrixIdInvite;
 import io.kamax.mxisd.invitation.IThreePidInviteReply;
 import io.kamax.mxisd.threepid.session.IThreePidSession;
 import io.kamax.mxisd.util.RestClientUtils;
-import org.apache.commons.lang.WordUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.WordUtils;
 
 import static io.kamax.mxisd.http.io.identity.StoreInviteRequest.Keys.RoomName;
 import static io.kamax.mxisd.http.io.identity.StoreInviteRequest.Keys.SenderDisplayName;

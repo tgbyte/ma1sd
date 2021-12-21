@@ -55,7 +55,7 @@ import io.kamax.mxisd.registration.RegistrationManager;
 import io.kamax.mxisd.session.SessionManager;
 import io.kamax.mxisd.storage.IStorage;
 import io.kamax.mxisd.storage.ormlite.OrmLiteSqlStorage;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
