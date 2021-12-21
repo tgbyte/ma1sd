@@ -73,7 +73,7 @@ public class OrmLiteSqlStorage implements IStorage {
     @FunctionalInterface
     private interface Getter<T> {
 
-        T get() throws SQLException, IOException;
+        T get() throws Exception;
 
     }
 
@@ -252,7 +252,9 @@ public class OrmLiteSqlStorage implements IStorage {
     private <T> T withCatcher(Getter<T> g) {
         try {
             return g.get();
-        } catch (SQLException | IOException e) {
+        } catch (RuntimeException e) {
+            throw e;
+        } catch (Exception e) {
             throw new RuntimeException(e); // FIXME do better
         }
     }
