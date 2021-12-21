@@ -24,7 +24,7 @@ import io.kamax.matrix.ThreePidMedium;
 import io.kamax.matrix.json.GsonUtil;
 import io.kamax.mxisd.backend.ldap.LdapBackend;
 import io.kamax.mxisd.exception.ConfigurationException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -31,9 +31,13 @@ import io.kamax.mxisd.as.processor.command.CommandProcessor;
 import io.kamax.mxisd.as.processor.command.InviteCommandProcessor;
 import io.kamax.mxisd.as.processor.command.LookupCommandProcessor;
 import io.kamax.mxisd.as.processor.command.PingCommandProcessor;
-import org.apache.commons.cli.*;
-import org.apache.commons.lang.text.StrBuilder;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.TextStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -116,7 +120,7 @@ public class MessageEventProcessor implements EventTypeProcessor {
     }
 
     public String getHelp() {
-        StrBuilder builder = new StrBuilder();
+        TextStringBuilder builder = new TextStringBuilder();
         builder.appendln("Available commands:");
         for (String cmd : processors.keySet()) {
             builder.append("\t").appendln(cmd);

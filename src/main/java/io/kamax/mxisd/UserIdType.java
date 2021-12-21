@@ -20,7 +20,7 @@
 
 package io.kamax.mxisd;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 // FIXME consider integrating in matrix-java-sdk?
 public enum UserIdType {

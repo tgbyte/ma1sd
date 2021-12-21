@@ -37,7 +37,7 @@ import io.kamax.mxisd.invitation.ThreePidInviteReply;
 import io.kamax.mxisd.threepid.connector.email.EmailSmtpConnector;
 import io.kamax.mxisd.threepid.generator.PlaceholderNotificationGenerator;
 import io.kamax.mxisd.threepid.session.ThreePidSession;
-import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -25,7 +25,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import io.kamax.matrix.json.GsonUtil;
 import io.kamax.mxisd.invitation.IThreePidInviteReply;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;

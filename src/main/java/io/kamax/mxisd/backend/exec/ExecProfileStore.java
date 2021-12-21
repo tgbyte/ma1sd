@@ -27,7 +27,7 @@ import io.kamax.mxisd.config.ExecConfig;
 import io.kamax.mxisd.profile.JsonProfileRequest;
 import io.kamax.mxisd.profile.JsonProfileResult;
 import io.kamax.mxisd.profile.ProfileProvider;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collections;
 import java.util.List;

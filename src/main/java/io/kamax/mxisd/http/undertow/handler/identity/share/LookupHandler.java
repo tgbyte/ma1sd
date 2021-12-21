@@ -23,7 +23,7 @@ package io.kamax.mxisd.http.undertow.handler.identity.share;
 import io.kamax.mxisd.http.undertow.handler.BasicHttpHandler;
 import io.kamax.mxisd.lookup.ALookupRequest;
 import io.undertow.server.HttpServerExchange;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

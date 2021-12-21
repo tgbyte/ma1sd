@@ -27,7 +27,7 @@ import com.twilio.type.PhoneNumber;
 import io.kamax.mxisd.config.threepid.connector.PhoneTwilioConfig;
 import io.kamax.mxisd.exception.InternalServerError;
 import io.kamax.mxisd.exception.NotImplementedException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

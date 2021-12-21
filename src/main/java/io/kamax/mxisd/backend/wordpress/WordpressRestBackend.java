@@ -25,7 +25,7 @@ import io.kamax.matrix.json.GsonUtil;
 import io.kamax.matrix.json.InvalidJsonException;
 import io.kamax.mxisd.config.wordpress.WordpressConfig;
 import io.kamax.mxisd.util.RestClientUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;

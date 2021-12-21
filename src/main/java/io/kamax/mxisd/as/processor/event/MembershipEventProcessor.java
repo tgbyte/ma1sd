@@ -34,7 +34,7 @@ import io.kamax.mxisd.invitation.IMatrixIdInvite;
 import io.kamax.mxisd.invitation.MatrixIdInvite;
 import io.kamax.mxisd.notification.NotificationManager;
 import io.kamax.mxisd.profile.ProfileManager;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

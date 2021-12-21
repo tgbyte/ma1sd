@@ -25,8 +25,8 @@ import io.kamax.matrix.hs._MatrixRoom;
 import io.kamax.mxisd.Mxisd;
 import io.kamax.mxisd.lookup.SingleLookupReply;
 import org.apache.commons.cli.CommandLine;
-import org.apache.commons.lang.text.StrBuilder;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.TextStringBuilder;
 
 import java.util.Optional;
 
@@ -56,7 +56,7 @@ public class LookupCommandProcessor implements CommandProcessor {
         }
 
         SingleLookupReply lookup = r.get();
-        StrBuilder b = new StrBuilder();
+        TextStringBuilder b = new TextStringBuilder();
         b.append("Result for 3PID lookup of ").append(medium).append(" ").appendln(address).appendNewLine();
         b.append("Matrix ID: ").appendln(lookup.getMxid().getId());
         b.appendln("Validity:")

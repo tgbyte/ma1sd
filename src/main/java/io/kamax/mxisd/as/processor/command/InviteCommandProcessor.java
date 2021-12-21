@@ -25,8 +25,8 @@ import io.kamax.matrix.hs._MatrixRoom;
 import io.kamax.mxisd.Mxisd;
 import io.kamax.mxisd.invitation.IThreePidInviteReply;
 import org.apache.commons.cli.CommandLine;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.text.StrBuilder;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.TextStringBuilder;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class InviteCommandProcessor implements CommandProcessor {
             String response;
             if (StringUtils.equals("list", arg)) {
 
-                StrBuilder b = new StrBuilder();
+                TextStringBuilder b = new TextStringBuilder();
 
                 List<IThreePidInviteReply> invites = m.getInvite().listInvites();
                 if (invites.isEmpty()) {
@@ -69,7 +69,7 @@ public class InviteCommandProcessor implements CommandProcessor {
                 } else {
                     String id = cmdLine.getArgList().get(2);
                     IThreePidInviteReply invite = m.getInvite().getInvite(id);
-                    StrBuilder b = new StrBuilder();
+                    TextStringBuilder b = new TextStringBuilder();
                     b.appendln("Details for Invitation #" + id);
                     b.appendNewLine().append("Room: ").append(invite.getInvite().getRoomId());
                     b.appendNewLine().append("Sender: ").append(invite.getInvite().getSender().toString());
