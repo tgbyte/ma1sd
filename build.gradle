@@ -173,7 +173,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'com.github.tomakehurst:wiremock:2.27.2'
     testImplementation 'com.unboundid:unboundid-ldapsdk:6.0.3'
-    testImplementation 'com.icegreen:greenmail:1.6.6'
+    testImplementation 'com.icegreen:greenmail:1.6.7'
 }
 
 jar {
