@@ -162,7 +162,7 @@ dependencies {
     api 'org.zeroturnaround:zt-exec:1.12'
 
     // HTTP server
-    api 'io.undertow:undertow-core:2.2.16.Final'
+    api 'io.undertow:undertow-core:2.2.17.Final'
 
     // Command parser for AS interface
     api 'commons-cli:commons-cli:1.5.0'
