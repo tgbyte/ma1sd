@@ -128,7 +128,7 @@ dependencies {
     api 'org.apache.httpcomponents:httpclient:4.5.13'
 
     // Phone numbers validation
-    api 'com.googlecode.libphonenumber:libphonenumber:8.12.46'
+    api 'com.googlecode.libphonenumber:libphonenumber:8.12.47'
 
     // E-mail sending
     api 'javax.mail:javax.mail-api:1.6.2'
