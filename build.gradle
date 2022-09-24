@@ -156,7 +156,7 @@ dependencies {
     api 'com.twilio.sdk:twilio:9.0.0'
 
     // SendGrid SDK to send emails from GCE
-    api 'com.sendgrid:sendgrid-java:4.9.1'
+    api 'com.sendgrid:sendgrid-java:4.9.3'
 
     // ZT-Exec for exec identity store
     api 'org.zeroturnaround:zt-exec:1.12'
