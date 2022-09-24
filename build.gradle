@@ -141,7 +141,7 @@ dependencies {
     api 'com.mchange:c3p0:0.9.5.5'
 
     // SQLite
-    api 'org.xerial:sqlite-jdbc:3.36.0.3'
+    api 'org.xerial:sqlite-jdbc:3.39.3.0'
 
     // PostgreSQL
     api 'org.postgresql:postgresql:42.5.0'
