@@ -119,7 +119,7 @@ dependencies {
     api 'net.i2p.crypto:eddsa:0.3.0'
 
     // LDAP connector
-    api 'org.apache.directory.api:api-all:2.1.0'
+    api 'org.apache.directory.api:api-all:2.1.2'
 
     // DNS lookups
     api 'dnsjava:dnsjava:3.5.1'
