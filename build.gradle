@@ -99,17 +99,17 @@ repositories {
 
 dependencies {
     // Logging
-    api 'org.slf4j:slf4j-simple:1.7.36'
+    api 'org.slf4j:slf4j-simple:2.0.2'
 
     // Easy file management
     api 'commons-io:commons-io:2.11.0'
 
     // Config management
-    api 'org.yaml:snakeyaml:1.30'
+    api 'org.yaml:snakeyaml:1.32'
 
     // Dependencies from old Matrix-java-sdk
     api 'org.apache.commons:commons-lang3:3.12.0'
-    api 'com.squareup.okhttp3:okhttp:4.9.3'
+    api 'com.squareup.okhttp3:okhttp:4.10.0'
     api 'commons-codec:commons-codec:1.15'
 
     // ORMLite
@@ -119,10 +119,10 @@ dependencies {
     api 'net.i2p.crypto:eddsa:0.3.0'
 
     // LDAP connector
-    api 'org.apache.directory.api:api-all:2.1.0'
+    api 'org.apache.directory.api:api-all:2.1.2'
 
     // DNS lookups
-    api 'dnsjava:dnsjava:3.5.0'
+    api 'dnsjava:dnsjava:3.5.1'
 
     // HTTP connections
     api 'org.apache.httpcomponents:httpclient:4.5.13'
@@ -135,7 +135,7 @@ dependencies {
     api 'com.sun.mail:javax.mail:1.6.2'
 
     // Google Firebase Authentication backend
-    api 'com.google.firebase:firebase-admin:8.1.0'
+    api 'com.google.firebase:firebase-admin:9.0.0'
 
     // Connection Pool
     api 'com.mchange:c3p0:0.9.5.5'
@@ -147,16 +147,16 @@ dependencies {
     api 'org.postgresql:postgresql:42.5.0'
 
     // MariaDB/MySQL
-    api 'org.mariadb.jdbc:mariadb-java-client:3.0.4'
+    api 'org.mariadb.jdbc:mariadb-java-client:3.0.8'
 
     // UNIX sockets
-    api 'com.kohlschutter.junixsocket:junixsocket-core:2.4.0'
+    api 'com.kohlschutter.junixsocket:junixsocket-core:2.5.1'
 
     // Twilio SDK for SMS
     api 'com.twilio.sdk:twilio:9.0.0'
 
     // SendGrid SDK to send emails from GCE
-    api 'com.sendgrid:sendgrid-java:4.9.1'
+    api 'com.sendgrid:sendgrid-java:4.9.3'
 
     // ZT-Exec for exec identity store
     api 'org.zeroturnaround:zt-exec:1.12'
