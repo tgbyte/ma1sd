@@ -150,7 +150,7 @@ dependencies {
     api 'org.mariadb.jdbc:mariadb-java-client:3.0.8'
 
     // UNIX sockets
-    api 'com.kohlschutter.junixsocket:junixsocket-core:2.4.0'
+    api 'com.kohlschutter.junixsocket:junixsocket-core:2.5.1'
 
     // Twilio SDK for SMS
     api 'com.twilio.sdk:twilio:9.0.0'
