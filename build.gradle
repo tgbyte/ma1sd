@@ -147,7 +147,7 @@ dependencies {
     api 'org.postgresql:postgresql:42.5.0'
 
     // MariaDB/MySQL
-    api 'org.mariadb.jdbc:mariadb-java-client:3.0.4'
+    api 'org.mariadb.jdbc:mariadb-java-client:3.0.8'
 
     // UNIX sockets
     api 'com.kohlschutter.junixsocket:junixsocket-core:2.4.0'
