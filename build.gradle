@@ -105,7 +105,7 @@ dependencies {
     api 'commons-io:commons-io:2.11.0'
 
     // Config management
-    api 'org.yaml:snakeyaml:1.30'
+    api 'org.yaml:snakeyaml:1.32'
 
     // Dependencies from old Matrix-java-sdk
     api 'org.apache.commons:commons-lang3:3.12.0'
@@ -162,7 +162,7 @@ dependencies {
     api 'org.zeroturnaround:zt-exec:1.12'
 
     // HTTP server
-    api 'io.undertow:undertow-core:2.2.17.Final'
+    api 'io.undertow:undertow-core:2.2.19.Final'
 
     // Command parser for AS interface
     api 'commons-cli:commons-cli:1.5.0'
