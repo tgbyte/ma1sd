@@ -99,7 +99,7 @@ repositories {
 
 dependencies {
     // Logging
-    api 'org.slf4j:slf4j-simple:2.0.2'
+    api 'org.slf4j:slf4j-simple:2.0.3'
 
     // Easy file management
     api 'commons-io:commons-io:2.11.0'
