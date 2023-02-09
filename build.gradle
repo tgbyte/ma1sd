@@ -153,7 +153,7 @@ dependencies {
     api 'com.kohlschutter.junixsocket:junixsocket-core:2.5.1'
 
     // Twilio SDK for SMS
-    api 'com.twilio.sdk:twilio:9.0.0'
+    api 'com.twilio.sdk:twilio:9.2.3'
 
     // SendGrid SDK to send emails from GCE
     api 'com.sendgrid:sendgrid-java:4.9.3'
